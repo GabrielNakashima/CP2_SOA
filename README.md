@@ -1,82 +1,123 @@
-# 🧩 API de Gerenciamento de Salas de Reunião - Checkpoint 2
-
-## 📝 Descrição do Projeto
+# API de Gerenciamento de Salas de Reunião - Checkpoint 2
+## Descrição do Projeto
 Esta API foi desenvolvida como parte do Checkpoint 2 da disciplina de Enterprise Application Development (FIAP). O objetivo é gerenciar o cadastro de salas de reunião e o agendamento de reservas, garantindo que não haja conflitos de horários.
 
-O projeto segue os princípios da arquitetura **SOA (Service Oriented Architecture)**, com separação clara de responsabilidades em camadas (Controller, Service, Repository, DTO e Domain).
+O projeto segue os princípios da arquitetura SOA (Service Oriented Architecture), com separação clara de responsabilidades em camadas (Controller, Service, Repository, DTO e Domain).
 
----
+### Tecnologias Utilizadas
+Java 17+
 
-## 🚀 Tecnologias Utilizadas
-- **Java 17+**
-- **Spring Boot 3.x**
-- **Spring Security + JWT** (Autenticação Stateless)
-- **Spring Data JPA**
-- **H2 Database** (Banco de dados em memória)
-- **Swagger/OpenAPI** (Documentação)
-- **Maven** (Gerenciador de dependências)
+Spring Boot 3.x
 
----
+Spring Data JPA
 
-## 🏗️ Arquitetura e Diferenciais Implementados
-- **Arquitetura SOA:** Divisão em pacotes por função.
-- **Tratamento Global de Exceções:** Implementado com `@RestControllerAdvice` para capturar erros de negócio.
-- **Regras de Negócio:** Validação rigorosa para impedir reservas simultâneas na mesma sala.
-- **Segurança:** Configuração de Spring Security preparada para JWT.
-- **Diferenciais:** - ✅ Tratamento de Exceções customizado.
-  - ✅ Validações de Datas (início deve ser antes do fim).
-  - ✅ Logging estruturado.
+H2 Database (Banco de dados em memória com carga inicial automática)
 
----
+Jakarta Validation (Validação de dados)
 
-## 🛠️ Como Executar o Projeto
+Maven (Gerenciador de dependências)
 
-1. Certifique-se de ter o **JDK 17** e o **Maven** instalados.
-2. Clone o repositório:
-   ```bash
-   git clone [CP2_SOA]
-Importe na sua IDE favorita (IntelliJ, Eclipse ou VS Code).
+## Arquitetura e Diferenciais Implementados
+Arquitetura SOA: Divisão em pacotes por função (Controller, Service, Repository).
 
-Execute a classe principal: Cp2SoaReservaDeSalaApplication.java.
+Tratamento Global de Exceções: Implementado com @RestControllerAdvice para capturar erros de negócio.
+
+Regras de Negócio: Validação rigorosa para impedir reservas simultâneas na mesma sala.
+
+Carga de Dados Inicial: A API já inicia populada com 3 salas de exemplo para facilitar os testes.
+
+### Diferenciais:
+
+
+✅ CRUD completo (Post, Get, Put, Delete) para Salas e Reservas.
+
+
+✅ Validações de Datas (início deve ser antes do fim).
+
+
+✅ Persistência em H2 com reset automático a cada execução.
+
+## Como Executar o Projeto
+Certifique-se de ter o JDK 17 e o Maven instalados.
+
+Clone o repositório:
+
+Bash<br>
+git clone https://github.com/GabrielNakashima/CP2_SOA.git<br>
+Importe na sua IDE favorita (IntelliJ, Eclipse ou VS Code).<br>
+
+Execute a classe principal: Cp2SoaReservaDeSalaApplication.java<br>
 
 A API estará disponível em: http://localhost:8080.
 
-📖 Documentação (Swagger)
-A documentação interativa dos endpoints pode ser acessada em:
-👉 http://localhost:8080/swagger-ui.html
+## Exemplos de Requisições (Postman)
+Listar Salas (GET) - Já vêm pré-carregadas
 
-🧪 Exemplos de Requisições (Insomnia/Postman)
-1. Criar Sala (POST)
-URL: http://localhost:8080/salas<br>
 
-JSON<Br>
-{ <Br>
-  "nome": "Sala Alpha", <br>
-  "capacidade": 10, <br>
-  "localizacao": "Bloco A - 2º Andar" <br>
-} <br>
-2. Listar Reservas (GET)<br>
-URL: http://localhost:8080/reservas<br>
+URL: http://localhost:8080/salas
 
-3. Criar Reserva (POST)<br>
-URL: http://localhost:8080/reservas<br>
 
-JSON<br>
-{<br>
-  "salaId": 1,<br>
-  "dataHoraInicio": "2026-10-10T14:00:00",<br>
-  "dataHoraFim": "2026-10-10T15:00:00",<br>
-  "responsavel": "Gabriel"<br>
-}<br>
+Criar Sala (POST)
 
-👤 Autor
+
+URL: http://localhost:8080/salas
+
+
+JSON
+{ 
+"nome": "Sala Alpha",
+
+
+"capacidade": 10,
+
+
+"localizacao": "Bloco A - 2º Andar"
+
+
+}
+
+
+Criar Reserva (POST)
+
+
+URL: http://localhost:8080/reservas
+
+
+JSON
+
+
+{
+
+
+"salaId": 1,
+
+
+"dataHoraInicio": "2026-10-10T14:00:00",
+
+
+"dataHoraFim": "2026-10-10T15:00:00",
+
+
+"responsavel": "Gabriel"
+
+
+}
+
+
+Atualizar Reserva (PUT)
+
+
+URL: http://localhost:8080/reservas/1
+
+
+Deletar Reserva (DELETE)
+
+
+URL: http://localhost:8080/reservas/1
+
+## Autor
 Nome: Gabriel Luni Nakashima
 
 RM: RM558096
 
 Turma: 3ESPZ
-
-### 💡 Dicas finais para a entrega:
-1. **GitHub:** Certifique-se de que o arquivo `.gitignore` está configurado para não subir as pastas `target` e arquivos da IDE (`.iml`, `.idea`).
-2. **Commit:** Dê um commit com uma mensagem clara, ex: `feat: finaliza CRUD de reservas e regras de conflito`.
-3. **Link:** Teste o link do GitHub antes de enviar no formulário/portal da FIAP.
